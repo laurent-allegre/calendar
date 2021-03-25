@@ -1,4 +1,4 @@
 # calendar
-Calendrier pour gérer des événements 
+Calendrier pour gérer des évènements 
 en php 7 POO
 
