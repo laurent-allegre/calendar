@@ -50,7 +50,13 @@
      public function  getWeeks() : int {
          $start = $this->getStartingDay();
          $end = (clone $start)->modify('+1 month -1 day');
-         $weeks = intval($end->format('W')) - intval($start->format('W')) + 1;
+         $startWeek = intval($start->format('W'));
+         $endWeek = intval($end->format('W'));
+         if ($endWeek === 1) {
+             $endWeek = intval((clone $end)->modify('- 7 days')->format('W')) + 1;
+         }
+         $weeks = $endWeek - $startWeek + 1 ;
+        // $weeks = intval($end->format('W')) - intval($start->format('W')) + 1;
          if($weeks < 0) {
              $weeks = intval($end->format('W'));
          }

@@ -48,7 +48,7 @@
     render('header', ['title' => $event->getName()]);
 ?>
         <div class="container">
-            <h1>Editer l'&vènement <small><?= h($event->getName()); ?></small> </h1>
+            <h1>Editer l'évènement <small><?= h($event->getName()); ?></small> </h1>
 
             <form action="" method="post"class="form">
                 <?php render('calendar/form', ['data' => $data, 'errors' => $errors]); ?>
