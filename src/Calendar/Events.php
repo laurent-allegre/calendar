@@ -19,7 +19,7 @@
              */
             public function getEventsBetween (\DateTime $start, \Datetime $end): array {
 
-                 $sql = "SELECT * FROM events WHERE start BETWEEN '{$start->format('Y-m-d 00:00:00')}' AND '{$end->format('Y-m-d 23:59:59' )}'";
+                 $sql = "SELECT * FROM events WHERE start BETWEEN '{$start->format('Y-m-d 00:00:00')}' AND '{$end->format('Y-m-d 23:59:59' )}' ORDER BY start ASC ";
 
                  $statement = $this->pdo->query($sql);
                  $results = $statement->fetchAll();
@@ -61,6 +61,48 @@
                     throw new \Exception("Aucun résultat n'a été trouvé ");
                 }
                 return $result;
+            }
+
+            public function hydrate (Event $event, array $data) {
+                $event->setName($data['name']);
+                $event->setDescription($data['description']);
+                $event->setStart(\DateTime::createFromFormat('Y-m-d H:i', $data['date'] . ' ' . $data['start'])->format('Y-m-d H:i:s'));
+                $event->setEnd(\DateTime::createFromFormat('Y-m-d H:i', $data['date'] . ' ' . $data['end'])->format('Y-m-d H:i:s'));
+                return $event;
+
+            }
+
+            /**
+             * CREER UN EVENEMENT AU NIVEAU DE LA BASE DE DONNEE
+             * @param Event $event
+             * @return bool
+             *
+             */
+            public function create (Event $event): bool {
+                $statement = $this->pdo->prepare('INSERT INTO events (name, description, start, end) VALUE (?, ?, ?, ?)');
+                return $statement->execute([
+                    $event->getName(),
+                    $event->getDescription(),
+                    $event->getStart()->format('Y-m-d H:i:s'),
+                    $event->getEnd()->format('Y-m-d H:i:s'),
+                ]);
+            }
+
+            /**
+             * MET A JOUR UN EVENEMENT AU NIVEAU DE LA BASE DE DONNEE
+             * @param Event $event
+             * @return bool
+             */
+            public function update(Event $event): bool {
+                $statement = $this->pdo->prepare('UPDATE events SET name = ?, description = ?, start = ?, end= ? WHERE id = ?');
+                return $statement->execute([
+                    $event->getName(),
+                    $event->getDescription(),
+                    $event->getStart()->format('Y-m-d H:i:s'),
+                    $event->getEnd()->format('Y-m-d H:i:s'),
+                    $event->getId()
+                ]);
+
             }
 
 

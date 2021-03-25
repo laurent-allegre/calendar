@@ -34,7 +34,7 @@
          * @param string $value
          * @return string
          */
-        function h(?string $value): string {
+        function h (?string $value): string {
             if ($value === null) {
                 return '';
             }

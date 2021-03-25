@@ -25,7 +25,7 @@
         render('header', ['title' => $event->getName()]);
 ?>
 
-    <h1><?= h ($event->getName()); ?></h1>
+    <h1><?= h($event->getName()); ?></h1>
 
     <ul>
         <li>
