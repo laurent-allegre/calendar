@@ -1,0 +1,15 @@
+{
+    "name": "alleg/calendar",
+    "authors": [
+        {
+            "name": "laurent-allegre",
+            "email": "laurent.allegre@dbmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Calendar\\":"src/Calendar"
+        }
+    },
+    "require": {}
+}
