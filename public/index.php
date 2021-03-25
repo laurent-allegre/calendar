@@ -43,10 +43,10 @@
 
                                    $date = (clone $start)->modify("+" . ($k + $i * 7) . "days");
                                    $eventsForDay = $events[$date->format('Y-m-d')] ?? [];
-                                   
+                                   $isToday = date('Y-m-d') === $date->format('Y-m-d');
                                    ?>
 
-                                   <td class="<?= $month->whithinMonth($date) ? '' : 'calendar__otherMonth' ; ?>">
+                                   <td class="<?= $month->whithinMonth($date) ? '' : 'calendar__otherMonth' ; ?> <?= $isToday ? 'is-today' : '' ; ?>">
                                        <?php if ($i === 0): ?>
                                            <div class="calendar__weekday"> <?= $day; ?> </div>
                                        <?php endif ; ?>

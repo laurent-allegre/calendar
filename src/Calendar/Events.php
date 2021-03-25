@@ -105,6 +105,15 @@
 
             }
 
+            /**TODO: supprime un évènement
+             * @param Event $event
+             * @return bool
+             */
+            public function delete (Event $event): bool {
+
+            }
+
+
 
 
 

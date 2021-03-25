@@ -17,7 +17,7 @@
 }
 
 .calendar__table td.is-today {
-    background-color: #e2e2e2;
+    background-color: #f3f3f3;
 }
 
 .calendar__table--6weeks td {
