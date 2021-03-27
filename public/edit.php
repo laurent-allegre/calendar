@@ -43,23 +43,38 @@
             }
         }
 
+        if (!empty ($_POST) && isset ($_POST)) {
+
+            if (isset ($_POST["actioneffacer"]) && $_POST["actioneffacer"] == "effacer") {
+                $events->delete($event);
+                header('location: index.php');
+            }
+}
 
 
-    render('header', ['title' => $event->getName()]);
-?>
+
+
+render('header', ['title' => $event->getName()]);
+        ?>
+
         <div class="container">
-            <h1>Editer l'évènement <small><?= h($event->getName()); ?></small> </h1>
+            <h1>Editer l'évènement <small> " <?= h($event->getName()); ?> "</small> </h1>
 
-            <form action="" method="post"class="form">
-                <?php render('calendar/form', ['data' => $data, 'errors' => $errors]); ?>
+                    <form action="" method="post"class="form">
+                        <?php render('calendar/form', ['data' => $data, 'errors' => $errors]); ?>
+                            <div class="form-group">
+                                <button class="btn btn-primary">Modifier l'évènement</button>
+                            </div>
+                    </form>
+                    <form id="archivage"  method="POST">
+                        <div class="form-group">
+                            <input type="hidden" name="actioneffacer" value="effacer">
+                            <button class="btn btn-danger">Supprimer l'évènement</button>
+                        </div>
+                    </form>
 
-                <div class="form-group">
-                    <button class="btn btn-primary">Modifier l'évènement</button>
-                </div>
 
-            </form>
         </div>
-
 
 
 

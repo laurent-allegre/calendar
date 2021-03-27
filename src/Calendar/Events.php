@@ -105,17 +105,14 @@
 
             }
 
-            /**TODO: supprime un évènement
+            /**
+             * supprime un évènement
              * @param Event $event
              * @return bool
              */
             public function delete (Event $event): bool {
                 $statement = $this->pdo->prepare('DELETE FROM events  WHERE id = ?');
                 return $statement->execute([
-                  //  $event->getName(),
-                  // $event->getDescription(),
-                  //  $event->getStart()->format('Y-m-d H:i:s'),
-                  //  $event->getEnd()->format('Y-m-d H:i:s'),
                     $event->getId()
                 ]);
 
